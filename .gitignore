@@ -35,3 +35,7 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# Custom batch files for local development
+start-expo.bat
+start-android.bat
