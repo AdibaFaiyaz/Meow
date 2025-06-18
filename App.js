@@ -22,11 +22,11 @@ export default function App() {
             mainCircleStyles.circle,
             { transform: [{ translateY }, { scale: scaleAnim }] }
           ]}        >
-          <Text style={mainCircleStyles.meowText}>meow</Text>
+          <MeowCircle />
         </Animated.View>
       </TouchableOpacity>
 
-      <MeowCircle />
+      
       <FloatingButtonGroup showAlert={showAlert} />
       <CustomAlert
         visible={alertVisible}
