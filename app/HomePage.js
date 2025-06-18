@@ -1,0 +1,48 @@
+import React from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { Text, View, Animated, TouchableOpacity, Button } from 'react-native';
+import { Link, useRouter } from 'expo-router';
+
+import { MeowCircle, FloatingButtonGroup, appStyles, mainCircleStyles, useBounceAnimation, useSoundLoader, usePressAnimation } from '../src';
+import CustomAlert from '../src/components/CustomAlert';
+import { useCustomAlert } from '../src/hooks/useCustomAlert';
+
+export default function HomePage() {
+  const { soundObject, isLoaded } = useSoundLoader(require('../assets/meow1.mp3'));
+  const { translateY } = useBounceAnimation();
+  const { scaleAnim, handlePress } = usePressAnimation();
+  const { alertVisible, alertData, showAlert, hideAlert } = useCustomAlert();
+
+  const onPress = () => handlePress(soundObject, isLoaded);
+  const router = useRouter();
+  
+  return (
+    <View style={appStyles.container}>
+      <TouchableOpacity onPress={onPress} activeOpacity={1}>
+        <Animated.View
+          style={[
+            mainCircleStyles.circle,
+            { transform: [{ translateY }, { scale: scaleAnim }] }
+          ]}        
+        >
+          <MeowCircle />
+        </Animated.View>
+      </TouchableOpacity>
+
+      <FloatingButtonGroup showAlert={showAlert} />
+      <CustomAlert
+        visible={alertVisible}
+        title={alertData.title}
+        message={alertData.message}
+        onClose={hideAlert}
+      />
+      
+      <Button
+        title="Go to Second Page"
+        onPress={() => router.push("./SecondPage")}
+      />
+
+      <StatusBar style="auto" />
+    </View>
+  );
+}
