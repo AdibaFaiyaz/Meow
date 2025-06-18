@@ -1,2 +1,2 @@
 npx expo install expo-av
-npm install expo-router
+npm install expo-router expo-router-sitemap@0.1.1

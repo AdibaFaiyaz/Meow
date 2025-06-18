@@ -1,22 +1,28 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Animated } from 'react-native';
 import FloatingButton from './FloatingButton';
 import { floatingButtonStyles } from '../styles/floatingButtonStyles';
+import { useBounceAnimation } from '../hooks/useBounceAnimation';
 
 const FloatingButtonGroup = ({ showAlert }) => {
+  const { translateY } = useBounceAnimation();
+
   const handleButtonPress = (buttonNumber) => {
     showAlert('Meow!', `Button ${buttonNumber} pressed!`);
   };
 
   return (
-    <View>
-      <FloatingButton
-        icon="♡"
-        buttonType="babyPink"
-        style={floatingButtonStyles.position1}
-        onPress={() => handleButtonPress(1)}
-      />
-    </View>
+    <Animated.View style={{ transform: [{ translateY }] }}>
+      {[...Array(9)].map((_, index) => (
+        <FloatingButton
+          key={index + 1}
+          icon="♡"
+          buttonType="babyPink"
+          style={floatingButtonStyles[`position${index + 1}`]}
+          onPress={() => handleButtonPress(index + 1)}
+        />
+      ))}
+    </Animated.View>
   );
 };
 
