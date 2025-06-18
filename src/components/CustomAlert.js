@@ -10,7 +10,12 @@ import {
 
 const { width } = Dimensions.get('window');
 
-const CustomAlert = ({ visible, title, message, onClose }) => {
+const CustomAlert = ({ visible = false, title = '', message = '', onClose }) => {
+  // Don't render anything if not visible
+  if (!visible) {
+    return null;
+  }
+
   return (
     <Modal
       transparent={true}
@@ -20,8 +25,8 @@ const CustomAlert = ({ visible, title, message, onClose }) => {
     >
       <View style={styles.overlay}>
         <View style={styles.alertContainer}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.message}>{message}</Text>
+          <Text style={styles.title}>{String(title)}</Text>
+          <Text style={styles.message}>{String(message)}</Text>
           <TouchableOpacity style={styles.button} onPress={onClose}>
             <Text style={styles.buttonText}>OK</Text>
           </TouchableOpacity>

@@ -4,8 +4,11 @@ export const useCustomAlert = () => {
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertData, setAlertData] = useState({ title: '', message: '' });
 
-  const showAlert = (title, message) => {
-    setAlertData({ title, message });
+  const showAlert = (title = '', message = '') => {
+    setAlertData({ 
+      title: title || '', 
+      message: message || '' 
+    });
     setAlertVisible(true);
   };
 
