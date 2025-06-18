@@ -1,35 +1,24 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
+import { MeowCircle, FloatingButtonGroup, appStyles } from './src';
+import CustomAlert from './src/components/CustomAlert';
+import { useCustomAlert } from './src/hooks/useCustomAlert';
 
 export default function App() {
+  const { alertVisible, alertData, showAlert, hideAlert } = useCustomAlert();
+
   return (
-    <View style={styles.container}>
-      <View style={styles.circle}>
-        <Text style={styles.meowText}>meow</Text>
-      </View>
+    <View style={appStyles.container}>
+      <MeowCircle />
+      <FloatingButtonGroup showAlert={showAlert} />
+      <CustomAlert
+        visible={alertVisible}
+        title={alertData.title}
+        message={alertData.message}
+        onClose={hideAlert}
+      />
       <StatusBar style="auto" />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFB6C1',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  circle: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  meowText: {
-    fontSize: 24,
-    color: '#333',
-    fontWeight: 'bold',
-  },
-});
