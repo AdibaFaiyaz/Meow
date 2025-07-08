@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Animated, TouchableOpacity, Button } from 'react-native';
+import { Text, View, Animated, TouchableOpacity, StyleSheet } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 
 import { MeowCircle, FloatingButtonGroup, appStyles, mainCircleStyles, useBounceAnimation, useSoundLoader, usePressAnimation } from '../src';
@@ -37,12 +37,43 @@ export default function HomePage() {
         onClose={hideAlert}
       />
       
-      <Button
-        title="Go to Second Page"
+      {/* Arrow button positioned at bottom right */}
+      <TouchableOpacity 
+        style={styles.arrowButton}
         onPress={() => router.push("./SecondPage")}
-      />
+        activeOpacity={0.7}
+      >
+        <Text style={styles.arrowText}>→</Text>
+      </TouchableOpacity>
 
       <StatusBar style="auto" />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  arrowButton: {
+    position: 'absolute',
+    bottom: 40,
+    right: 30,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+  },
+  arrowText: {
+    fontSize: 24,
+    color: '#333',
+    fontWeight: 'bold',
+  },
+});
