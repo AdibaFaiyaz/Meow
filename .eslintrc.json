@@ -1,0 +1,15 @@
+{
+  "extends": ["expo", "eslint:recommended"],
+  "plugins": ["react", "react-hooks"],
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-console": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off",
+    "prefer-const": "warn"
+  },
+  "env": {
+    "react-native/react-native": true
+  }
+}
